@@ -28,23 +28,22 @@ O Cadastro de Profissionais é uma aplicação web que permite o gerenciamento d
 1. Clone este repositório:
    ```bash
    git clone https://github.com/matheusabreudev/cadastro_profissionais.git
-   
 2. Importe o projeto em sua IDE de preferência (Eclipse, IntelliJ, etc.).
-
 3. Configure o arquivo application.properties com as credenciais do banco de dados PostgreSQL:
    ```bash
    spring.datasource.url=jdbc:postgresql://localhost:5432/cadastro_profissionais(nome sugerido)
    spring.datasource.username=usuario
    spring.datasource.password=senha
-
 4. Execute a aplicação a partir da classe CadastroProfissionaisApplication.
 5. Acesse a aplicação em seu navegador: http://localhost:8080.
 
 ## Uso
+
 - Swagger disponível na url http://localhost:8080/swagger-ui.html
 - Todos os endpoints disponíveis no swagger
 
 ## Regras Aplicadas
+
 1. Um contato só pode ser cadastrado se tiver um profissional associado e existente.
 2. Levando em consideração numeros de telefone fixo e móvel e ddd, telefone só pode ter numeros e entre 10 e 11 caracteres.
 3. Telefone também não pode ter letras ou caracteres especiais, foi aplicada uma validação para esse fim.
@@ -52,3 +51,7 @@ O Cadastro de Profissionais é uma aplicação web que permite o gerenciamento d
 5. Caso o profissional tenha sido apagado, seus contatos também não irão aparecer.
 6. Não é possível cadastrar contatos para profissionais excluídos.
 7. Não é possível cadastrar contatos com telefones já existentes.
+
+## Contato
+
+Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato comigo por email em matheus.abreu.magalhaes@gmail.com.
