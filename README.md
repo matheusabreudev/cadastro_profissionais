@@ -1,6 +1,6 @@
 # Cadastro de Profissionais
 
-O Cadastro de Profissionais é uma aplicação web que permite o gerenciamento de informações sobre profissionais, como nome, cargo, data de nascimento, entre outros.
+O Cadastro de Profissionais é uma aplicação web que permite o gerenciamento de informações sobre profissionais, como nome, cargo, data de nascimento, contatos entre outros.
 
 ## Funcionalidades
 
@@ -29,12 +29,12 @@ O Cadastro de Profissionais é uma aplicação web que permite o gerenciamento d
    ```bash
    git clone https://github.com/matheusabreudev/cadastro_profissionais.git
 2. Importe o projeto em sua IDE de preferência (Eclipse, IntelliJ, etc.).
-3. Configure o arquivo application.properties com as credenciais do banco de dados PostgreSQL:
+3. Configure o arquivo application.yml com as credenciais do banco de dados PostgreSQL:
    ```bash
    spring.datasource.url=jdbc:postgresql://localhost:5432/cadastro_profissionais(nome sugerido)
    spring.datasource.username=usuario
    spring.datasource.password=senha
-4. Execute a aplicação a partir da classe CadastroProfissionaisApplication.
+4. Execute a aplicação a partir da classe CadastroProfissionalSimplesDentalApplication.
 5. Acesse a aplicação em seu navegador: http://localhost:8080.
 
 ## Uso
