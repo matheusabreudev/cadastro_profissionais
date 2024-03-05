@@ -29,7 +29,8 @@ O Cadastro de Profissionais é uma aplicação web que permite o gerenciamento d
    ```bash
    git clone https://github.com/matheusabreudev/cadastro_profissionais.git
 2. Importe o projeto em sua IDE de preferência (Eclipse, IntelliJ, etc.).
-3. Configure o arquivo application.yml com as credenciais do banco de dados PostgreSQL:
+3. Crie um banco de nome cadastro_profissionais no seu postgres local.
+4. Configure o arquivo application.yml com as credenciais do banco de dados PostgreSQL:
    ```bash
    spring:
     datasource:
@@ -43,7 +44,7 @@ O Cadastro de Profissionais é uma aplicação web que permite o gerenciamento d
       properties:
         hibernate:
           dialect: org.hibernate.dialect.PostgreSQLDialect
-4. Execute a aplicação a partir da classe CadastroProfissionalSimplesDentalApplication.
+5. Execute a aplicação a partir da classe CadastroProfissionalSimplesDentalApplication.
 
 ## Uso
 
