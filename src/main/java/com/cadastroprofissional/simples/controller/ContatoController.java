@@ -4,6 +4,7 @@ import com.cadastroprofissional.simples.controller.openApi.ContatoApi;
 import com.cadastroprofissional.simples.model.Contato;
 import com.cadastroprofissional.simples.model.dto.ContatoDTO;
 import com.cadastroprofissional.simples.model.input.ContatoInput;
+import com.cadastroprofissional.simples.model.input.ContatoUpdateInput;
 import com.cadastroprofissional.simples.service.ContatoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -50,7 +51,7 @@ public class ContatoController implements ContatoApi {
 
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateContato(@PathVariable Long id, @RequestBody ContatoInput input) {
+    public ResponseEntity<String> updateContato(@PathVariable Long id, @RequestBody ContatoUpdateInput input) {
         Contato cont = this.service.updateContato(id, input);
         return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Contato com id %s atualizado com sucesso.", cont.getId().toString()));
     }

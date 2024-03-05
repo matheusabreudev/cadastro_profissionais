@@ -4,10 +4,12 @@ import com.cadastroprofissional.simples.model.Contato;
 import com.cadastroprofissional.simples.model.Profissional;
 import com.cadastroprofissional.simples.model.dto.ContatoDTO;
 import com.cadastroprofissional.simples.model.input.ContatoInput;
+import com.cadastroprofissional.simples.model.input.ContatoUpdateInput;
 import com.cadastroprofissional.simples.repository.ContatoRepository;
 import com.cadastroprofissional.simples.util.MensagemUtil;
 import com.cadastroprofissional.simples.util.exception.EntidadeNaoExistenteException;
 import com.cadastroprofissional.simples.util.exception.TelefoneInvalidoException;
+import com.cadastroprofissional.simples.util.exception.TelefoneJaCadastradoException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,7 @@ public class ContatoService {
     }
 
     public List<ContatoDTO> findAllContatos(String q, List<String> fields) {
-        List<Contato> teste = this.repository.findByString(q);
+//        List<ContatoDTO> contatosFiltrados = this.repository.findByString(q).stream().map(cont -> cont.toDto()).collect(Collectors.toList());
 
         List<ContatoDTO> contatosFiltrados = this.repository.findAll().stream().map(cont -> cont.toDto()).collect(Collectors.toList());
 
@@ -67,13 +69,16 @@ public class ContatoService {
             throw new TelefoneInvalidoException(MensagemUtil.MSG_TELEFONE_INVALIDO);
         }
 
+        if(this.validaTelefoneExistente(input.getContato())) {
+            throw new TelefoneJaCadastradoException(MensagemUtil.MSG_TELEFONE_JA_CADASTRADO);
+        }
 
         Contato contato = new Contato(input);
         contato.setCreatedDate(LocalDate.now());
         return this.repository.save(contato);
     }
 
-    public Contato updateContato(Long contatoId, ContatoInput input) {
+    public Contato updateContato(Long contatoId, ContatoUpdateInput input) {
         Contato contatoExistente = findContatoById(contatoId);
 
         if(input.getNome() != null) {
@@ -82,11 +87,6 @@ public class ContatoService {
 
         if(input.getContato() != null) {
             contatoExistente.setContato(input.getContato());
-        }
-
-        if(input.getProfissional() != null) {
-            Profissional profissional = new Profissional(input.getProfissional());
-            contatoExistente.setProfissional(profissional);
         }
 
         return this.repository.save(contatoExistente);
@@ -104,6 +104,10 @@ public class ContatoService {
         telefone = telefone.trim();
 
         return telefone.matches("[0-9]+") && (telefone.length() == 10 || telefone.length() == 11);
+    }
+
+    private Boolean validaTelefoneExistente(String contato) {
+        return this.repository.existsContatoByContato(contato);
     }
 
 }

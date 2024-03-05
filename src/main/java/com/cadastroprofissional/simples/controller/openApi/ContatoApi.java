@@ -3,6 +3,7 @@ package com.cadastroprofissional.simples.controller.openApi;
 import com.cadastroprofissional.simples.model.Contato;
 import com.cadastroprofissional.simples.model.dto.ContatoDTO;
 import com.cadastroprofissional.simples.model.input.ContatoInput;
+import com.cadastroprofissional.simples.model.input.ContatoUpdateInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -62,7 +63,7 @@ public interface ContatoApi {
                     @ApiResponse(responseCode = "400", description = "Houve um problema ao atualizar o contato"),
                     @ApiResponse(responseCode = "404", description = "Contato não encontrado")
             })
-    ResponseEntity<String> updateContato(@PathVariable Long id, @RequestBody ContatoInput input);
+    ResponseEntity<String> updateContato(@PathVariable Long id, @RequestBody ContatoUpdateInput input);
 
     /**
      * Exclui um contato

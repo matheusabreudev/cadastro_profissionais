@@ -22,4 +22,6 @@ public interface ContatoRepository extends JpaRepository<Contato, Long> {
             " LOWER(c.profissional.nome) LIKE LOWER(CONCAT('%', :q, '%')))")
     List<Contato> findByString(@Param("q") String q);
 
+    Boolean existsContatoByContato(String contato);
+
 }

@@ -31,7 +31,7 @@ public class ProfissionalController implements ProfissionalApi {
     @Override
     @GetMapping
     public ResponseEntity<List<ProfissionalDTO>> findAllProfissionais(@RequestParam(required = false) String q, @RequestParam(required = false) List<String> fields) {
-        List<ProfissionalDTO> profissionais = service.findAllProfissionais(q, fields).stream().map(prof -> prof.toDTO()).collect(Collectors.toList());
+        List<ProfissionalDTO> profissionais = service.findAllProfissionais(q, fields);
         return ResponseEntity.status(HttpStatus.OK).body(profissionais);
     }
 

@@ -1,6 +1,7 @@
 package com.cadastroprofissional.simples.service;
 
 import com.cadastroprofissional.simples.model.Profissional;
+import com.cadastroprofissional.simples.model.dto.ProfissionalDTO;
 import com.cadastroprofissional.simples.model.input.ProfissionalInput;
 import com.cadastroprofissional.simples.repository.ProfissionalRepository;
 import com.cadastroprofissional.simples.util.MensagemUtil;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -24,16 +26,18 @@ public class ProfissionalService {
                 .orElseThrow(() -> new EntidadeNaoExistenteException(MensagemUtil.MSG_ENTITY_PROFISSIONAL_NOT_EXISTS));
     }
 
-    public List<Profissional> findAllProfissionais(String q, List<String> fields) {
+    public List<ProfissionalDTO> findAllProfissionais(String q, List<String> fields) {
 
-        List<Profissional> profissionaisFiltrados = this.repository.findAll();
+//        List<ProfissionalDTO> profissionaisFiltrados = this.repository.findByString(q).stream().map(prof -> prof.toDTO()).collect(Collectors.toList());
 
-        List<Profissional> profissionaisSelecionados = new ArrayList<>();
+        List<ProfissionalDTO> profissionaisFiltrados = this.repository.findAll().stream().map(prof -> prof.toDTO()).collect(Collectors.toList());
+
+        List<ProfissionalDTO> profissionaisSelecionados = new ArrayList<>();
 
         if(fields != null && !fields.isEmpty()){
-            for (Profissional profissional : profissionaisFiltrados) {
+            for (ProfissionalDTO profissional : profissionaisFiltrados) {
 
-                Profissional profissionalSelecionado = new Profissional();
+                ProfissionalDTO profissionalSelecionado = new ProfissionalDTO();
 
                 for (String field : fields) {
                     switch (field) {
@@ -58,6 +62,7 @@ public class ProfissionalService {
     }
 
     public Profissional createProfissional(ProfissionalInput input) {
+        input.setCargo(input.getCargo().toUpperCase());
         Profissional profissional = new Profissional(input);
         profissional.setCreatedDate(LocalDate.now());
         return this.repository.save(profissional);
