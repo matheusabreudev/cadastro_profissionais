@@ -4,11 +4,15 @@
  */
 package com.cadastroprofissional.simples.model.input;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ContatoInput {
 
     private String nome;

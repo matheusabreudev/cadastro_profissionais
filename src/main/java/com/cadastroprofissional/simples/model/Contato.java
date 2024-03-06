@@ -49,8 +49,16 @@ public class Contato {
      * Converte esta entidade Contato em um objeto ContatoDTO.
      * @return Um objeto ContatoDTO contendo os dados deste contato.
      */
-    public ContatoDTO toDto () {
-        return ContatoDTO.builder().id(this.id).nome(this.nome).contato(this.contato).createdDate(this.createdDate).profissional(this.profissional.getNome()).build();
+    public ContatoDTO toDto() {
+        ContatoDTO contatoDTO = new ContatoDTO();
+        contatoDTO.setId(this.id);
+        contatoDTO.setNome(this.nome);
+        contatoDTO.setContato(this.contato);
+        contatoDTO.setCreatedDate(this.createdDate);
+        if (this.profissional != null) {
+            contatoDTO.setProfissional(this.profissional.getNome());
+        }
+        return contatoDTO;
     }
 
     /**
