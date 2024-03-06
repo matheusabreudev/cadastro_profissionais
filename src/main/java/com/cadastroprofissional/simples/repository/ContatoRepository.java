@@ -28,12 +28,12 @@ public interface ContatoRepository extends JpaRepository<Contato, Long> {
      * @return Uma lista de contatos que correspondem à consulta.
      */
     @Query("SELECT c FROM Contato c WHERE " +
-            "(:q IS NULL OR " +
-            " lower(c.nome) LIKE lower(CONCAT('%', :q, '%')) OR " +
-            " lower(c.contato) LIKE lower(CONCAT('%', :q, '%')) OR " +
-            " TO_CHAR(c.createdDate, 'YYYY-MM-DD') LIKE CONCAT('%', :q, '%') OR " +
-            " lower(c.profissional.nome) LIKE lower(CONCAT('%', :q, '%')))")
-    List<Contato> findByString(@Param("q") String q);
+            "(LOWER(c.nome) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
+            "LOWER(c.contato) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
+            "CAST(c.createdDate AS string) LIKE CONCAT('%', :q, '%') OR " +
+            "LOWER(c.profissional.nome) LIKE LOWER(CONCAT('%', :q, '%')))" +
+            "OR :q IS NULL")
+    List<Contato> findByAnyColumn(@Param("q") String q);
 
     /**
      * Verifica se um contato já existe com base no número de contato.

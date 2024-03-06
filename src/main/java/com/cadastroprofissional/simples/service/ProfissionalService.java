@@ -44,9 +44,7 @@ public class ProfissionalService {
      */
     public List<ProfissionalDTO> findAllProfissionais(String q, List<String> fields) {
 
-//        List<ProfissionalDTO> profissionaisFiltrados = this.repository.findByString(q).stream().map(prof -
-
-        List<ProfissionalDTO> profissionaisFiltrados = this.repository.findAll().stream().map(prof -> prof.toDTO()).collect(Collectors.toList());
+        List<ProfissionalDTO> profissionaisFiltrados = this.repository.findByAnyColumn(q).stream().map(prof -> prof.toDTO()).collect(Collectors.toList());
 
         List<ProfissionalDTO> profissionaisSelecionados = new ArrayList<>();
 
@@ -57,13 +55,15 @@ public class ProfissionalService {
                 ProfissionalDTO profissionalSelecionado = new ProfissionalDTO();
 
                 for (String field : fields) {
-                    switch (field) {
-                        case "id" -> profissionalSelecionado.setId(profissional.getId());
-                        case "nome" -> profissionalSelecionado.setNome(profissional.getNome());
-                        case "cargo" -> profissionalSelecionado.setCargo(profissional.getCargo());
-                        case "dataNascimento" ->
-                                profissionalSelecionado.setDataNascimento(profissional.getDataNascimento());
-                        case "createdDate" -> profissionalSelecionado.setCreatedDate(profissional.getCreatedDate());
+                    if(field != null) {
+                        switch (field) {
+                            case "id" -> profissionalSelecionado.setId(profissional.getId());
+                            case "nome" -> profissionalSelecionado.setNome(profissional.getNome());
+                            case "cargo" -> profissionalSelecionado.setCargo(profissional.getCargo());
+                            case "dataNascimento" ->
+                                    profissionalSelecionado.setDataNascimento(profissional.getDataNascimento());
+                            case "createdDate" -> profissionalSelecionado.setCreatedDate(profissional.getCreatedDate());
+                        }
                     }
                 }
                 profissionaisSelecionados.add(profissionalSelecionado);

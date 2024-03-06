@@ -46,9 +46,7 @@ public class ContatoService {
      * @return Uma lista de objetos ContatoDTO filtrada com base nos parâmetros fornecidos.
      */
     public List<ContatoDTO> findAllContatos(String q, List<String> fields) {
-//        List<ContatoDTO> contatosFiltrados = this.repository.findByString(q).stream().map(cont -> cont.toDto()).collect(Collectors.toList());
-
-        List<ContatoDTO> contatosFiltrados = this.repository.findAll().stream().map(cont -> cont.toDto()).collect(Collectors.toList());
+        List<ContatoDTO> contatosFiltrados = this.repository.findByAnyColumn(q).stream().map(cont -> cont.toDto()).collect(Collectors.toList());
 
         List<ContatoDTO> contatosSelecionados = new ArrayList<>();
 
@@ -58,12 +56,14 @@ public class ContatoService {
                 ContatoDTO contatoSelecionado = new ContatoDTO();
 
                 for (String field : fields) {
-                    switch (field) {
-                        case "id" -> contatoSelecionado.setId(contato.getId());
-                        case "nome" -> contatoSelecionado.setNome(contato.getNome());
-                        case "contato" -> contatoSelecionado.setContato(contato.getContato());
-                        case "createdDate" -> contatoSelecionado.setCreatedDate(contato.getCreatedDate());
-                        case "profissional" -> contatoSelecionado.setProfissional(contato.getProfissional());
+                    if(field != null) {
+                        switch (field) {
+                            case "id" -> contatoSelecionado.setId(contato.getId());
+                            case "nome" -> contatoSelecionado.setNome(contato.getNome());
+                            case "contato" -> contatoSelecionado.setContato(contato.getContato());
+                            case "createdDate" -> contatoSelecionado.setCreatedDate(contato.getCreatedDate());
+                            case "profissional" -> contatoSelecionado.setProfissional(contato.getProfissional());
+                        }
                     }
                 }
                 contatosSelecionados.add(contatoSelecionado);
