@@ -1,7 +1,6 @@
 package com.cadastroprofissional.simples.service;
 
 import com.cadastroprofissional.simples.model.Contato;
-import com.cadastroprofissional.simples.model.Profissional;
 import com.cadastroprofissional.simples.model.dto.ContatoDTO;
 import com.cadastroprofissional.simples.model.input.ContatoInput;
 import com.cadastroprofissional.simples.model.input.ContatoUpdateInput;
@@ -80,6 +79,10 @@ public class ContatoService {
 
     public Contato updateContato(Long contatoId, ContatoUpdateInput input) {
         Contato contatoExistente = findContatoById(contatoId);
+
+        if (!this.validarTelefone(input.getContato())) {
+            throw new TelefoneInvalidoException(MensagemUtil.MSG_TELEFONE_INVALIDO);
+        }
 
         if(input.getNome() != null) {
             contatoExistente.setNome(input.getNome());

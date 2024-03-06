@@ -16,10 +16,10 @@ public interface ContatoRepository extends JpaRepository<Contato, Long> {
 
     @Query("SELECT c FROM Contato c WHERE " +
             "(:q IS NULL OR " +
-            " LOWER(c.nome) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
-            " LOWER(c.contato) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
+            " lower(c.nome) LIKE lower(CONCAT('%', :q, '%')) OR " +
+            " lower(c.contato) LIKE lower(CONCAT('%', :q, '%')) OR " +
             " TO_CHAR(c.createdDate, 'YYYY-MM-DD') LIKE CONCAT('%', :q, '%') OR " +
-            " LOWER(c.profissional.nome) LIKE LOWER(CONCAT('%', :q, '%')))")
+            " lower(c.profissional.nome) LIKE lower(CONCAT('%', :q, '%')))")
     List<Contato> findByString(@Param("q") String q);
 
     Boolean existsContatoByContato(String contato);
