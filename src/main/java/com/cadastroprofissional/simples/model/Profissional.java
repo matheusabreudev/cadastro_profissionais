@@ -1,3 +1,7 @@
+/**
+ * Representa um profissional cadastrado no sistema.
+ * Esta classe é uma entidade JPA que mapeia os profissionais no banco de dados.
+ */
 package com.cadastroprofissional.simples.model;
 
 import com.cadastroprofissional.simples.model.dto.ProfissionalDTO;
@@ -18,7 +22,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -51,14 +54,26 @@ public class Profissional {
     @OneToMany(mappedBy = "profissional")
     private List<Contato> contatos;
 
+    /**
+     * Converte esta entidade Profissional em um objeto ProfissionalDTO.
+     * @return Um objeto ProfissionalDTO contendo os dados deste profissional.
+     */
     public ProfissionalDTO toDTO() {
         return ProfissionalDTO.builder().id(this.id).nome(this.nome).ativo(this.ativo).cargo(this.cargo.getDescricao()).dataNascimento(this.dataNascimento).createdDate(this.createdDate).build();
     }
 
+    /**
+     * Construtor que cria um objeto Profissional a partir de seu id com a intenção de serializar esse no momento do save via JPA.
+     * @param id .
+     */
     public Profissional(Long id) {
         this.id = id;
     }
 
+    /**
+     * Construtor que cria um objeto Profissional a partir dos dados de entrada.
+     * @param input Um objeto ProfissionalInput contendo os dados do novo profissional.
+     */
     public Profissional(ProfissionalInput input) {
         this.nome = input.getNome();
         this.cargo = CargoEnum.valueOf(input.getCargo());

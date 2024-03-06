@@ -17,8 +17,15 @@ import java.util.List;
 public interface ProfissionalApi {
 
     /**
-     * Lista os profissionais
-     * @return Lista os profissionais, pode ser baseado em uma palavra especifica, com campos definidos ou completos, caso não tenha parametro algum setado.
+     * Lista todos os profissionais com a opção de filtrar por consulta e selecionar campos específicos.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param q      Consulta opcional para filtrar os profissionais.
+     * @param fields Lista opcional de campos a serem selecionados para cada profissional.
+     * @return Um objeto ResponseEntity contendo uma lista de objetos ProfissionalDTO.
+     *         Retorna status HTTP 200 (OK) se a listagem for encontrada com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao buscar a lista.
+     *         Retorna status HTTP 404 (Not Found) se nenhum profissional for encontrado.
      */
     @Operation(summary = "Lista os profissionais",
             responses = {
@@ -29,8 +36,14 @@ public interface ProfissionalApi {
     ResponseEntity<List<ProfissionalDTO>> findAllProfissionais(@RequestParam(required = false) String q, @RequestParam(required = false) List<String>fields);
 
     /**
-     * Busca um profissional
-     * @return Retorna o profissional pelo id;
+     * Busca um profissional pelo ID.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param id O ID do profissional a ser buscado.
+     * @return Um objeto ResponseEntity contendo um objeto ProfissionalDTO correspondente ao profissional encontrado.
+     *         Retorna status HTTP 200 (OK) se o profissional for encontrado com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao buscar o profissional.
+     *         Retorna status HTTP 404 (Not Found) se o profissional não for encontrado.
      */
     @Operation(summary = "Busca profissional pelo id",
             responses = {
@@ -41,8 +54,14 @@ public interface ProfissionalApi {
     ResponseEntity<ProfissionalDTO> findProfissionalById(@PathVariable Long id);
 
     /**
-     * Cria um profissional
-     * @return Retorna mensagem de sucesso;
+     * Cria um novo profissional.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param input O objeto ProfissionalInput contendo os detalhes do novo profissional a ser criado.
+     * @return Um objeto ResponseEntity contendo uma mensagem indicando o sucesso da operação.
+     *         Retorna status HTTP 201 (Created) se o profissional for criado com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao criar o profissional.
+     *         Retorna status HTTP 404 (Not Found) se houver um problema ao buscar a página.
      */
     @Operation(summary = "Cria um profissional",
             responses = {
@@ -53,8 +72,15 @@ public interface ProfissionalApi {
     ResponseEntity<String> createProfissional(@RequestBody ProfissionalInput input);
 
     /**
-     * Atualiza um profissional pelo id e body
-     * @return Retorna mensagem de sucesso;
+     * Atualiza um profissional existente pelo ID.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param id O ID do profissional a ser atualizado.
+     * @param input O objeto ProfissionalInput contendo os novos detalhes do profissional.
+     * @return Um objeto ResponseEntity contendo uma mensagem indicando o sucesso da operação.
+     *         Retorna status HTTP 201 (Created) se o profissional for atualizado com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao atualizar o profissional.
+     *         Retorna status HTTP 404 (Not Found) se o profissional não for encontrado.
      */
     @Operation(summary = "Atualiza um profissional",
             responses = {
@@ -65,8 +91,14 @@ public interface ProfissionalApi {
     ResponseEntity<String> updateProfissional(@PathVariable Long id, @RequestBody ProfissionalInput input);
 
     /**
-     * Exclui um profissional
-     * @return Retorna mensagem de sucesso;
+     * Exclui um profissional pelo ID.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param id O ID do profissional a ser excluído.
+     * @return Um objeto ResponseEntity contendo uma mensagem indicando o sucesso da operação.
+     *         Retorna status HTTP 204 (No Content) se o profissional for excluído com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao buscar o profissional.
+     *         Retorna status HTTP 404 (Not Found) se o profissional não for encontrado.
      */
     @Operation(summary = "Exclui um profissional pelo ID",
             responses = {

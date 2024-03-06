@@ -1,6 +1,9 @@
+/**
+ * Representa um objeto de transferência de dados (DTO) para um Contato.
+ * Este DTO é usado para transferir informações sobre um contato entre as camadas da aplicação.
+ */
 package com.cadastroprofissional.simples.model.dto;
 
-import com.cadastroprofissional.simples.model.Profissional;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

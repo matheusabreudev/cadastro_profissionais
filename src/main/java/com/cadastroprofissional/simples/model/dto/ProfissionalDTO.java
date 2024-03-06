@@ -1,3 +1,7 @@
+/**
+ * Representa um objeto de transferência de dados (DTO) para um Profissional.
+ * Este DTO é usado para transferir informações sobre um profissional entre as camadas da aplicação.
+ */
 package com.cadastroprofissional.simples.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;

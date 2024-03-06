@@ -1,3 +1,7 @@
+/**
+ * Representa um contato de um profissional.
+ * Esta classe é uma entidade JPA que mapeia os contatos dos profissionais no banco de dados.
+ */
 package com.cadastroprofissional.simples.model;
 
 import com.cadastroprofissional.simples.model.dto.ContatoDTO;
@@ -41,10 +45,18 @@ public class Contato {
     @JoinColumn(name = "PROFISSIONAL_ID")
     private Profissional profissional;
 
+    /**
+     * Converte esta entidade Contato em um objeto ContatoDTO.
+     * @return Um objeto ContatoDTO contendo os dados deste contato.
+     */
     public ContatoDTO toDto () {
         return ContatoDTO.builder().id(this.id).nome(this.nome).contato(this.contato).createdDate(this.createdDate).profissional(this.profissional.getNome()).build();
     }
 
+    /**
+     * Construtor que cria um objeto Contato a partir dos dados de entrada.
+     * @param cont Um objeto ContatoInput contendo os dados do novo contato.
+     */
     public Contato (ContatoInput cont) {
         this.contato = cont.getContato();
         this.nome = cont.getNome();

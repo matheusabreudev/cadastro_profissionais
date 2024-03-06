@@ -1,3 +1,7 @@
+/**
+ * Representa os dados de entrada para criar ou atualizar um profissional.
+ * Esses dados são recebidos da camada de apresentação e usados para criar ou atualizar um profissional na camada de serviço.
+ */
 package com.cadastroprofissional.simples.model.input;
 
 import lombok.Getter;

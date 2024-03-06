@@ -11,8 +11,18 @@ import java.util.Optional;
 @Repository
 public interface ProfissionalRepository extends JpaRepository<Profissional, Long> {
 
+    /**
+     * Busca um profissional pelo ID e verifica se está ativo.
+     * @param profissionalId O ID do profissional a ser buscado.
+     * @return Um Optional contendo o profissional, se encontrado.
+     */
     Optional<Profissional> findProfissionalByIdAndAtivoIsTrue(Long profissionalId);
 
+    /**
+     * Busca profissionais com base em uma string de consulta.
+     * @param q A string de consulta.
+     * @return Uma lista de profissionais que correspondem à consulta.
+     */
     @Query("SELECT p FROM Profissional p WHERE " +
             "(:q IS NULL OR " +
             " LOWER(p.nome) LIKE LOWER(CONCAT('%', :q, '%')) OR " +

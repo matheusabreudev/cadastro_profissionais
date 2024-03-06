@@ -18,8 +18,15 @@ import java.util.List;
 public interface ContatoApi {
 
     /**
-     * Lista os contatos
-     * @return Lista os contatos, pode ser baseado em uma palavra especifica, com campos definidos ou completos, caso não tenha parametro algum setado.
+     * Lista os contatos com base nos parâmetros opcionais.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param q      Opcional. Uma string de consulta para filtrar os contatos.
+     * @param fields Opcional. Uma lista de campos para incluir na resposta.
+     * @return Um objeto ResponseEntity contendo uma lista de objetos ContatoDTO.
+     *         Retorna status HTTP 200 (OK) se a listagem for encontrada com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao buscar a lista.
+     *         Retorna status HTTP 404 (Not Found) se os contatos não forem encontrados.
      */
     @Operation(summary = "Lista os contatos",
             responses = {
@@ -30,8 +37,14 @@ public interface ContatoApi {
     ResponseEntity<List<ContatoDTO>> findAllContatos(@RequestParam(required = false) String q, @RequestParam(required = false) List<String>fields);
 
     /**
-     * Busca um contato
-     * @return Retorna o contato pelo id;
+     * Busca um contato pelo ID.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param id O ID do contato a ser buscado.
+     * @return Um objeto ResponseEntity contendo o contato encontrado.
+     *         Retorna status HTTP 200 (OK) se o contato for encontrado com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao buscar o contato.
+     *         Retorna status HTTP 404 (Not Found) se o contato não for encontrado.
      */
     @Operation(summary = "Busca contato pelo id",
             responses = {
@@ -42,8 +55,14 @@ public interface ContatoApi {
     ResponseEntity<ContatoDTO> findContatoById(@PathVariable Long id);
 
     /**
-     * Cria um contato
-     * @return Retorna mensagem de sucesso;
+     * Cria um novo contato com base nos dados fornecidos no corpo da solicitação.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param input O objeto ContatoInput contendo os dados do novo contato a ser criado.
+     * @return Um objeto ResponseEntity contendo uma mensagem indicando o sucesso da criação do contato.
+     *         Retorna status HTTP 201 (Created) se o contato for criado com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao criar o contato.
+     *         Retorna status HTTP 404 (Not Found) se houver um problema ao buscar a página.
      */
     @Operation(summary = "Cria um contato",
             responses = {
@@ -54,8 +73,15 @@ public interface ContatoApi {
     ResponseEntity<String> createContato(@RequestBody ContatoInput input);
 
     /**
-     * Atualiza um contato pelo id e body
-     * @return Retorna mensagem de sucesso;
+     * Atualiza um contato existente com base no ID fornecido e nos dados fornecidos no corpo da solicitação.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param id    O ID do contato a ser atualizado.
+     * @param input O objeto ContatoUpdateInput contendo os novos dados para atualização do contato.
+     * @return Um objeto ResponseEntity contendo uma mensagem indicando o sucesso da atualização do contato.
+     *         Retorna status HTTP 201 (Created) se o contato for atualizado com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao atualizar o contato.
+     *         Retorna status HTTP 404 (Not Found) se o contato não for encontrado.
      */
     @Operation(summary = "Atualiza um contato",
             responses = {
@@ -66,8 +92,14 @@ public interface ContatoApi {
     ResponseEntity<String> updateContato(@PathVariable Long id, @RequestBody ContatoUpdateInput input);
 
     /**
-     * Exclui um contato
-     * @return Retorna mensagem de sucesso;
+     * Exclui um contato existente com base no ID fornecido.
+     *
+     * @author Matheus Abreu Magalhães
+     * @param id O ID do contato a ser excluído.
+     * @return Um objeto ResponseEntity contendo uma mensagem indicando o sucesso da exclusão do contato.
+     *         Retorna status HTTP 204 (No Content) se o contato for excluído com sucesso.
+     *         Retorna status HTTP 400 (Bad Request) se houver um problema ao buscar o contato.
+     *         Retorna status HTTP 404 (Not Found) se o contato não for encontrado.
      */
     @Operation(summary = "Exclui um contato pelo ID",
             responses = {
