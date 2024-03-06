@@ -6,6 +6,7 @@ import com.cadastroprofissional.simples.model.input.ProfissionalInput;
 import com.cadastroprofissional.simples.repository.ProfissionalRepository;
 import com.cadastroprofissional.simples.util.MensagemUtil;
 import com.cadastroprofissional.simples.util.enums.CargoEnum;
+import com.cadastroprofissional.simples.util.exception.CargoInvalidoException;
 import com.cadastroprofissional.simples.util.exception.EntidadeNaoExistenteException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -89,6 +90,11 @@ public class ProfissionalService {
      */
     public Profissional createProfissional(ProfissionalInput input) {
         input.setCargo(input.getCargo().toUpperCase());
+        try {
+            CargoEnum.valueOf(input.getCargo().toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            throw new CargoInvalidoException(MensagemUtil.CARGO_INVALIDO);
+        }
         Profissional profissional = new Profissional(input);
         profissional.setCreatedDate(LocalDate.now());
         return this.repository.save(profissional);
@@ -112,7 +118,11 @@ public class ProfissionalService {
         }
 
         if(input.getCargo() != null) {
-            ProfissionalExistente.setCargo(CargoEnum.valueOf(input.getCargo().toUpperCase()));
+            try {
+                ProfissionalExistente.setCargo(CargoEnum.valueOf(input.getCargo().toUpperCase()));
+            } catch (IllegalArgumentException ex) {
+                throw new CargoInvalidoException(MensagemUtil.CARGO_INVALIDO);
+            }
         }
 
         if(input.getDataNascimento() != null) {

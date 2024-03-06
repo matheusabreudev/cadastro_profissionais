@@ -7,4 +7,6 @@ public class MensagemUtil {
     public static final String MSG_TELEFONE_INVALIDO = "Telefone inválido, telefone precisa ter entre 10 e 11 caracteres e não pode ter caracteres especiais nem letras";
     public static final String MSG_TELEFONE_JA_CADASTRADO = "Telefone já cadastrado na base de dados";
 
+    public static final String CARGO_INVALIDO = "O cargo não foi digitado corretamente, cargos disponiveis: Desenvolvedor, Designer, Suporte, Tester";
+
 }
