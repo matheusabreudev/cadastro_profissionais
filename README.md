@@ -58,8 +58,9 @@ O Cadastro de Profissionais é uma aplicação web que permite o gerenciamento d
 3. Telefone também não pode ter letras ou caracteres especiais, foi aplicada uma validação para esse fim.
 4. Foi realizada a exclusão lógica baseada em uma flag chamada "ativo", e os filtros se baseiam nesse ponto.
 5. Caso o profissional tenha sido apagado, seus contatos também não irão aparecer.
-6. Não é possível cadastrar contatos para profissionais excluídos.
-7. Não é possível cadastrar contatos com telefones já existentes.
+6. Mesmo que o contato exista de fato no banco de dados, ele não irá aparecer para busca, caso o profissional tenha sido "apagado".
+7. Não é possível cadastrar contatos para profissionais excluídos.
+8. Não é possível cadastrar contatos com telefones já existentes.
 
 ## Contato
 
